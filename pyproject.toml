@@ -1,12 +1,13 @@
 [tool.poetry]
-name = "flask_template"
+name = "360crm-devops-test"
 version = "0.1.0"
 description = "flask project template"
 authors = ["Th1Alexandre <th1alexandre.dev@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 flask = "^2.3.2"
 flasgger = "^0.9.7"
 sqlalchemy = "^2.0.16"
@@ -30,7 +31,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 88
-target-version = ['py311']
+target-version = ['py312']
 
 
 [tool.isort]
@@ -38,7 +39,7 @@ profile = "black"
 
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 ignore_missing_imports = true
 
 
