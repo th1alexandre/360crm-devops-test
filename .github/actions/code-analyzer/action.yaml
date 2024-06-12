@@ -1,0 +1,38 @@
+name: Analyze code quality
+description: This action runs code formatter tools and linters to analyze code quality.
+inputs:
+  files-to-check:
+    description: files to be analyzed
+    required: true
+    type: string
+  auto-fix:
+    description: whether to auto-fix code with black/isort
+    required: true
+    default: true
+    type: boolean
+outputs:
+  files-formatted:
+    description: files that have been modified (formatted)
+    value: ${{ steps.files.outputs.files-formatted }}
+runs:
+  using: composite
+  steps:
+    - name: run linters
+      run: |
+        poetry run mypy ${{ inputs.files-to-check }}
+        poetry run flake8 ${{ inputs.files-to-check }}
+      shell: bash
+    - name: run auto-formatter tools
+      if: failure() && inputs.auto-fix == 'true'
+      id: formatters
+      run: |
+        poetry run black ${{ inputs.files-to-check }}
+        poetry run isort ${{ inputs.files-to-check }}
+      shell: bash
+    - name: output files modified by formatters
+      if: failure() && steps.formatters.outcome == 'success'
+      id: files
+      run: |
+        formatted=$(git status --porcelain | sed s/^...//)
+        echo "files-formatted=${formatted}" >> $GITHUB_OUTPUT
+      shell: bash

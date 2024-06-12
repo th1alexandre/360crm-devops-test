@@ -1,0 +1,27 @@
+name: Setup Python, Poetry and cache dependencies
+description: Setup Python and installs Poetry, also cache installed dependencies
+inputs:
+  python-version:
+    description: Desired python version
+    required: false
+    default: '3.11'
+    type: string
+  poetry-version:
+    description: Desired poetry version
+    required: false
+    default: '1.5.1'
+    type: string
+runs:
+  using: composite
+  steps:
+    - name: Setup Poetry
+      env:
+        POETRY_VERSION: ${{ inputs.poetry-version }}
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+      shell: bash
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'poetry'
