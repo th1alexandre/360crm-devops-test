@@ -1,0 +1,14 @@
+# dynamoDB
+dynamodb_enabled       = true
+table_name             = "360crm-log-table"
+point_in_time_recovery = false
+
+# s3
+s3_enabled          = true
+s3_force_path_style = false
+
+bucket_name = "360crm-bucket"
+bucket_acl  = "private"
+
+log_bucket_name = "360crm-log-bucket"
+log_bucket_acl  = "log-delivery-write"
