@@ -1,10 +1,9 @@
-from flasgger import LazyJSONEncoder, LazyString, Swagger
-
-from flask import Flask, request
+from flasgger import Swagger  # LazyJSONEncoder, LazyString,
+from flask import Flask  # request
 
 
 def initialize_flasgger(app: Flask):
-    app.json_encoder = LazyJSONEncoder
+    # app.json_encoder = LazyJSONEncoder
 
     swagger_config = {
         "headers": [],
@@ -24,14 +23,14 @@ def initialize_flasgger(app: Flask):
 
     template = dict(
         info={
-            "title": LazyString(lambda: "Flask App - Swagger UI"),
-            "version": LazyString(lambda: "0.1.0"),
-            "uiversion": LazyString(lambda: 3),
-            "description": LazyString(lambda: "Flask App - API Documentation"),
-            "termsOfService": LazyString(lambda: "/there_is_no_tos"),
+            "title": "360CRM Challenge - Swagger UI",
+            "version": "0.1.0",
+            "uiversion": 3,
+            "description": "360CRM Challenge - API Documentation",
+            "termsOfService": "/there_is_no_tos",
         },
-        host=LazyString(lambda: request.host),
-        schemes=[LazyString(lambda: "https" if request.is_secure else "http")],
+        host="localhost:5000",
+        schemes=["http", "https"],
     )
 
     return Swagger(app, config=swagger_config, template=template)
