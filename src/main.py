@@ -1,4 +1,9 @@
-from flask import Flask
+import logging
+import os
+from uuid import uuid4
+
+import boto3
+from flask import Flask, request
 
 from config import FlaskConfig
 from library.exceptions import exception_handler
@@ -9,6 +14,33 @@ from swagger import initialize_flasgger
 def create_app():
     try:
         app = Flask(__name__)
+
+        # logging into dynamodb
+        dynamodb = boto3.resource(
+            "dynamodb",
+            region_name="us-east-1",
+            endpoint_url=os.getenv("AWS_ENDPOINT_URL"),
+        )
+        table = dynamodb.Table(os.getenv("DYNAMODB_LOG_TABLE_NAME"))
+
+        @app.before_request
+        def log_request_info():
+            request_id = str(uuid4())
+            log_entry = {
+                "logID": request_id,
+                "Method": request.method,
+                "URL": request.url,
+                "Headers": dict(request.headers),
+            }
+
+            try:
+                table.put_item(Item=log_entry)
+                logging.info(f"Logged request {request_id}")
+            except Exception as e:
+                logging.error(
+                    f"Unable to write log to DynamoDB table. logID: {request_id}"
+                )
+                raise e
 
         initialize_flasgger(app)
 
