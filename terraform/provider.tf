@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    kind = {
+      source = "tehcyx/kind"
+    }
+  }
+}
+
 provider "aws" {
 
   access_key = "mock_access_key"
@@ -12,5 +20,8 @@ provider "aws" {
   endpoints {
     s3       = "http://s3.localhost.localstack.cloud:4566"
     dynamodb = "http://localhost:4566"
+    # dynamodb = "http://localhost.localstack.cloud:4566"
   }
 }
+
+provider "kind" {}
