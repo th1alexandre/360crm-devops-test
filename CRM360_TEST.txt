@@ -1,0 +1,54 @@
+Olá Thiago,
+
+
+Parabenizamos por chegar nessa etapa e desde já apreciamos o seu tempo investido em participar do nosso processo de recrutamento para opotunidade Engenheiro DevOps JR, com muita alegria que lhe enviamos o teste técnico para poder avaçamos com o processo. 
+
+Segue o desafio:
+
+===========================================================================================
+
+Teste com ferramentas
+
+Cenário:
+Você foi contratado por uma startup para implantar uma aplicação web em um ambiente de staging (testes) e depois em produção. A aplicação é desenvolvida em Python e usa PostgreSQL como banco de dados e MongoDB para armazenar logs. Você precisa configurar um ambiente automatizado e escalável para implantar a aplicação em contêineres Docker usando Kubernetes. Além disso, é necessário implementar um pipeline de CI/CD usando Jenkins para garantir a entrega contínua da aplicação. O ambiente de staging deve ser executado localmente usando o LocalStack para simular os serviços da AWS, enquanto o ambiente de produção será implantado na AWS.
+
+
+Tarefas:
+
+Crie um repositorio no github e uma nova branch chamada develop mantendo a main para o projeto que for para produção. Inclua um README.md com instruções sobre. Demonstre um exemplo de como você criaria um branch de feature, faria mudanças e as mesclaria de volta ao branch principal.
+
+Use o Terraform para provisionar a infraestrutura necessária para o ambiente de staging na sua máquina local, utilizando o LocalStack para simular os serviços da AWS (Criar um bucket S3, uma tabela DynamoDB).Nessa parte é esperado no repositorio do projeto os arquivos .tf utilizados para a criação dos recursos S3 e Dynamodb juntamente com os arquivos de provisionamento do LocalStack para avalidor testar.
+
+Crie um cluster do Kubernetes com Kind usando o Terraform configurando as roles para cada parte do cluster(Controlplane,ETCD, Worker...) poste no README.md os comandos utilizados para criar o cluster.
+
+Faça um fork desse repositorio e crie um Dockerfile para contêinerizar esta aplicação https://github.com/python019/django_crm. É esperado em seu repositorio, uma pasta com o codigo fonte do fork e Dockerfile desenvolvido para o avaliador testar.
+
+Crie um pipeline de CI/CD usando o Jenkins. Configure gatilhos automáticos para iniciar o pipeline sempre que houver mudanças no repositório Git da aplicação. O pipeline deve compilar o código, criar a imagem do Docker, implantar no cluster do Kubernetes que foi criado com Kind. A implantação pode ser no jenkins via Kubectl, ArgoCD, ou qualquer outra forma que escolha, o que é esperado é o jenkinsfile no repositorio do Github.
+
+Caso entenda executar os testes automatizados com alguma ferramenta de sua escolha para testes em container, caso decida testar descrver o cenario de teste no README.md.
+
+Utilize o Helm para gerenciar a implantação do Nginx como um ingress controller no cluster do Kubernetes Kind. É esperado que os comandos ou charts de como foi instalado no repositorio do Github.
+
+Configure a integração do SonarQube com o pipeline de CI/CD para garantir a qualidade do código da aplicação. Execute análises estáticas de código e verifique os resultados no painel do SonarQube. Nessa parte é esperado um docker-compose.yaml com as configurações do SonarQube implementado e no README.md explicando como foi integrado no pipeline para ser testado.
+
+Documente todo o processo de implantação e configuração, incluindo as decisões tomadas, arquitetura adotada e scripts utilizados. Certifique-se de que a documentação esteja clara e fácil de ser entendida por outros membros da equipe.
+
+Os candidatos devem fornecer o código fonte (através do repositório GitHub criado) junto com qualquer documentação necessária, prints de tela e diagramas. Seria incrivel se também incluir um breve vídeo de demonstração explicando o processo de execução dos scripts e do pipeline CI/CD.
+
+Critérios de Avaliação: 
+
+- Qualidade do Código: O código deve ser funcional e livre de erros.
+- Melhores Práticas: O candidato deve demonstrar conhecimento de melhores práticas em scripting, IaC, controle de versão, CI/CD, Kubernetes e Docker.
+- Documentação: A documentação deve ser clara e precisa, facilitando a compreensão e a execução dos scripts.
+- Qual porcentagem do teste foi entregue.
+
+
+Detalhes importante:
+- Prazo para entrega do teste: 5 dias, prazo valendo a partir do momento de abertura desse e-mail;
+- Assim que receber responder, com "Aceito o desafio" em até 24h ou será considerado automaticamente fora do processo.
+
+
+Qualquer dúvida que venha ter nos mande um email.
+
+
+Time de recrutamento e seleção 360CRM Soluções.
